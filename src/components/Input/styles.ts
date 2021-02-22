@@ -55,6 +55,15 @@ export const Container = styled.div<ContainerProps>`
       color: #666360;
     }
   }
+
+  input:-webkit-autofill
+{
+    -webkit-box-shadow: 0 0 0px 1000px #232129 inset !important;
+    -webkit-text-fill-color: #f4ede8 !important;
+    border-radius: 0;
+    marker: none;
+}
+
   svg {
     margin-right: 16px;
   }

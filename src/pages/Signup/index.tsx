@@ -31,6 +31,7 @@ const Signup: React.FC = () => {
     async (data: SignUpForData) => {
       try {
         formRef.current?.setErrors({});
+
         const schemaValidation = Yup.object().shape({
           name: Yup.string().required('Nome Obrigatório'),
           email: Yup.string()

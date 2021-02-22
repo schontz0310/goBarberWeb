@@ -1,7 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable react/prop-types */
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
+import { AxiosError } from 'axios';
 import api from '../services/api';
 
 interface User {
@@ -77,6 +84,21 @@ export const AuthProvider: React.FC = ({ children }) => {
     },
     [data.token],
   );
+
+  useEffect(() => {
+    console.log('entrou aqui');
+    api.interceptors.response.use(
+      response => response,
+      (err: AxiosError) => {
+        console.log('erro');
+        if (err.response?.status === 401) {
+          signOut();
+        }
+
+        return Promise.reject(err);
+      },
+    );
+  }, [signOut]);
 
   return (
     <AuthContext.Provider
